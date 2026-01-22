@@ -97,6 +97,7 @@
         padding: 3rem 1.5rem;
         max-width: 1200px;
         margin: 0 auto;
+        background: #1A1A1A;
     }
 
     .category-section {
@@ -111,7 +112,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         margin-bottom: 2rem;
-        color: #1A1A1A;
+        color: #FFFFFF;
         font-weight: 600;
     }
 
@@ -853,9 +854,7 @@
         initTelegramWebApp();
         loadStoredData();
         loadCategories();
-        if (CONFIG.categories.length > 0) {
-            switchCategory(CONFIG.categories[0].id);
-        }
+        // Plus besoin d'appeler switchCategory ici car déjà activé dans loadCategories
     };
 
     function initTelegramWebApp() {
@@ -876,7 +875,7 @@
             const tab = document.createElement('div');
             tab.className = 'category-tab' + (index === 0 ? ' active' : '');
             tab.textContent = category.name;
-            tab.onclick = () => switchCategory(category.id);
+            tab.onclick = function() { switchCategory(category.id, this); };
             tabsContainer.appendChild(tab);
             
             // Créer la section de produits pour chaque catégorie
@@ -894,14 +893,14 @@
         });
     }
 
-    function switchCategory(categoryId) {
+    function switchCategory(categoryId, tabElement) {
         currentCategory = categoryId;
         
         // Mettre à jour les onglets actifs
         document.querySelectorAll('.category-tab').forEach(tab => {
             tab.classList.remove('active');
         });
-        event.target.classList.add('active');
+        tabElement.classList.add('active');
         
         // Afficher la bonne section
         document.querySelectorAll('.category-section').forEach(section => {
