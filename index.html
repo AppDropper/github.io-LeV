@@ -215,6 +215,167 @@
             gap: 0.35rem;
         }
 
+        /* PAGE INFOS */
+        .info-page {
+            background: #FFFFFF;
+            padding: 3rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
+        }
+
+        .info-page h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1A1A1A;
+        }
+
+        .info-page p {
+            color: #666666;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .info-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .info-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #1A1A1A;
+            font-weight: 600;
+            border-left: 4px solid #1A1A1A;
+            padding-left: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #1A1A1A;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #F8F7F4;
+            color: #1A1A1A;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #1A1A1A;
+            background: #FFFFFF;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: #F8F7F4;
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #1A1A1A;
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            color: #666666;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .info-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1A1A1A;
+            font-weight: bold;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .contact-button:hover {
+            background: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-info-btn {
+            width: 100%;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            border: none;
+            padding: 1.3rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-info-btn:hover {
+            background: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -747,6 +908,14 @@
                 height: 36px;
                 font-size: 1rem;
             }
+
+            .info-page {
+                padding: 2rem 1rem;
+            }
+
+            .info-page h2 {
+                font-size: 1.6rem;
+            }
         }
 
         /* Animation d'apparition */
@@ -862,21 +1031,11 @@
                             description: 'H bientôt de retour !🍫🔄.',
                             price: '8€',
                             badge: '🔄🥇',
-                            // GALERIE MÉDIA (images + vidéos)
                             media: [
                                 {
                                     type: 'image',
                                     url: 'https://github.com/AppDropper/github.io-LeV/blob/main/gitkeep/be%20back%20soon.jpg?raw=true'
-                                },
-                                // Ajoutez d'autres médias ici
-                                // {
-                                //     type: 'image',
-                                //     url: 'URL_IMAGE_2'
-                                // },
-                                // {
-                                //     type: 'video',
-                                //     url: 'URL_VIDEO'
-                                // }
+                                }
                             ],
                             formats: [
                                 { name: '2.5', price: '20€' },
@@ -948,6 +1107,11 @@
                             comments: []
                         }
                     ]
+                },
+                {
+                    id: 'info',
+                    name: 'ℹ️ Infos',
+                    isInfoPage: true
                 }
             ]
         };
@@ -986,18 +1150,51 @@
                 tab.onclick = function() { switchCategory(category.id, this); };
                 tabsContainer.appendChild(tab);
                 
-                // Créer la section de produits pour chaque catégorie
+                // Créer la section pour chaque catégorie
                 const section = document.createElement('div');
                 section.className = 'category-section' + (index === 0 ? ' active' : '');
                 section.id = `category-${category.id}`;
-                section.innerHTML = `
-                    <h2 class="category-title">${category.name}</h2>
-                    <div class="products-grid" id="grid-${category.id}"></div>
-                `;
+                
+                if (category.isInfoPage) {
+                    // PAGE INFOS
+                    section.innerHTML = `
+                        <div class="info-page">
+                            <h2>📋 Informations & Contact</h2>
+                            <p>Bienvenue sur notre page d'informations. N'hesitez pas à nous contacter pour toute question.</p>
+                            
+                            <div class="info-section">
+                                <h3>🕒 Horaires d'ouverture</h3>
+                                <div class="info-card">
+                                    <p><strong>Prise de commande :</strong> 10h - 00h</p>
+                                    <p><strong>Ouverture :</strong> 13h00 - 00h00</p>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3>📍Meet up et livraison</h3>
+                                <div class="info-card">
+                                    <ul>
+                                        <li>Meet up en MP</li>
+                                        <li>Livraison : +10€</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                    `;
+                } else {
+                    // SECTION PRODUITS
+                    section.innerHTML = `
+                        <h2 class="category-title">${category.name}</h2>
+                        <div class="products-grid" id="grid-${category.id}"></div>
+                    `;
+                }
+                
                 productsContainer.appendChild(section);
                 
-                // Charger les produits de la catégorie
-                loadProductsForCategory(category);
+                // Charger les produits si ce n'est pas la page info
+                if (!category.isInfoPage) {
+                    loadProductsForCategory(category);
+                }
             });
         }
 
@@ -1049,6 +1246,38 @@
                 
                 grid.appendChild(card);
             });
+        }
+
+        // FORMULAIRE DE CONTACT
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const telegramHandle = document.getElementById('telegramHandle').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const requestType = document.getElementById('requestType').value;
+            const message = document.getElementById('message').value;
+            
+            const formattedMessage = `📋 NOUVEAU MESSAGE\n\n` +
+                `👤 Nom: ${fullName}\n` +
+                `💬 Telegram: ${telegramHandle}\n` +
+                `${email ? `📧 Email: ${email}\n` : ''}` +
+                `${phone ? `📱 Téléphone: ${phone}\n` : ''}` +
+                `🏷️ Type: ${requestType}\n\n` +
+                `💭 Message:\n${message}`;
+            
+            const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(formattedMessage)}`;
+            
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+            
+            // Réinitialiser le formulaire
+            document.getElementById('contactForm').reset();
+            showFeedback('Message envoyé ! Nous vous répondrons rapidement.');
         }
 
         // OUVERTURE DU MODAL AVEC CARROUSEL
@@ -1390,7 +1619,7 @@
                 if (stored) {
                     const data = JSON.parse(stored);
                     data.forEach((storedCategory, catIndex) => {
-                        if (CONFIG.categories[catIndex]) {
+                        if (CONFIG.categories[catIndex] && !CONFIG.categories[catIndex].isInfoPage) {
                             storedCategory.products.forEach((storedProduct, prodIndex) => {
                                 if (CONFIG.categories[catIndex].products[prodIndex]) {
                                     CONFIG.categories[catIndex].products[prodIndex].ratings = storedProduct.ratings || [];
