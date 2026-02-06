@@ -1,16 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>😈 Le V Menu 😈</title>
+    <title>😈Le V Menu 😈</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    
     <style>
         * {
             margin: 0;
@@ -23,24 +19,19 @@
             background: #F8F7F4;
             color: #1A1A1A;
             line-height: 1.6;
-            padding-bottom: 80px;
         }
 
-        /* HEADER */
         .header {
             background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
-            padding: 2.5rem 1.5rem 1.5rem;
+            padding: 3rem 1.5rem 2rem;
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .brand-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
             font-weight: 700;
             color: #FFFFFF;
             letter-spacing: -0.5px;
@@ -48,110 +39,86 @@
 
         .brand-subtitle {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 300;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* NAVIGATION TABS */
-        .nav-tabs {
-            display: flex;
-            background: #1A1A1A;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+        /* NAVIGATION PAR CATÉGORIES */
+        .category-nav {
+            background: #FFFFFF;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .nav-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .nav-tab {
-            flex: 1;
-            min-width: 80px;
-            padding: 1rem;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            white-space: nowrap;
-        }
-
-        .nav-tab:hover {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .nav-tab.active {
-            color: #FFFFFF;
-            border-bottom-color: #FFFFFF;
-        }
-
-        /* SECTIONS */
-        .section {
-            display: none;
-            padding: 2rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* CATEGORY FILTER */
-        .category-filter {
+        .category-tabs {
             display: flex;
             gap: 0.75rem;
-            margin-bottom: 2rem;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem;
             scrollbar-width: none;
-            padding-bottom: 0.5rem;
+            -ms-overflow-style: none;
         }
 
-        .category-filter::-webkit-scrollbar {
+        .category-tabs::-webkit-scrollbar {
             display: none;
         }
 
-        .category-btn {
-            padding: 0.75rem 1.5rem;
-            background: #FFFFFF;
-            border: 2px solid #E0E0E0;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 0.9rem;
+        .category-tab {
+            background: #F8F7F4;
+            border: 2px solid transparent;
+            padding: 0.85rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
-            color: #666;
+            font-size: 0.9rem;
+            color: #666666;
         }
 
-        .category-btn:hover {
-            border-color: #1A1A1A;
+        .category-tab:hover {
+            background: #F0EFE9;
             color: #1A1A1A;
         }
 
-        .category-btn.active {
+        .category-tab.active {
             background: #1A1A1A;
             color: #FFFFFF;
             border-color: #1A1A1A;
         }
 
-        /* PRODUCTS GRID */
+        .products-section {
+            padding: 3rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1A1A1A;
+        }
+
+        .category-section {
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .product-card {
@@ -172,7 +139,7 @@
         .product-image-container {
             position: relative;
             overflow: hidden;
-            height: 220px;
+            height: 260px;
             background: #F5F5F5;
         }
 
@@ -189,26 +156,28 @@
 
         .product-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 16px;
+            right: 16px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             color: #1A1A1A;
-            padding: 0.4rem 0.9rem;
+            padding: 0.5rem 1rem;
             border-radius: 30px;
             font-size: 0.75rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .product-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
             color: #1A1A1A;
             line-height: 1.3;
@@ -216,9 +185,10 @@
 
         .product-description {
             color: #666666;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .product-footer {
@@ -230,75 +200,169 @@
         }
 
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
         }
 
         .product-rating {
             color: #1A1A1A;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.35rem;
         }
 
-        /* INFO PAGE */
-        .info-section {
+        /* PAGE INFOS */
+        .info-page {
             background: #FFFFFF;
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 3rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
         }
 
-        .info-section h2 {
+        .info-page h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 1rem;
             color: #1A1A1A;
         }
 
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.25rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        .info-page p {
+            color: #666666;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
 
-        .info-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        .info-section {
+            margin-bottom: 2.5rem;
         }
 
-        .info-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            min-width: 32px;
-        }
-
-        .info-content h3 {
+        .info-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #1A1A1A;
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            font-size: 1rem;
+            border-left: 4px solid #1A1A1A;
+            padding-left: 1rem;
         }
 
-        .info-content p {
-            color: #666;
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #1A1A1A;
+            font-weight: 600;
             font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #F8F7F4;
+            color: #1A1A1A;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #1A1A1A;
+            background: #FFFFFF;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
             line-height: 1.6;
         }
 
-        .contact-btn {
+        .info-card {
+            background: #F8F7F4;
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #1A1A1A;
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            color: #666666;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .info-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1A1A1A;
+            font-weight: bold;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .contact-button:hover {
+            background: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-info-btn {
             width: 100%;
             background: #1A1A1A;
             color: #FFFFFF;
             border: none;
-            padding: 1.2rem;
-            border-radius: 16px;
+            padding: 1.3rem;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -306,13 +370,13 @@
             transition: all 0.3s ease;
         }
 
-        .contact-btn:hover {
+        .submit-info-btn:hover {
             background: #000000;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
-        /* MODAL */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -363,6 +427,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-weight: 300;
         }
 
         .modal-close:hover {
@@ -370,34 +435,194 @@
             transform: rotate(90deg);
         }
 
-        .modal-media {
+        /* CARROUSEL MÉDIA AMÉLIORÉ */
+        .modal-media-gallery {
             position: relative;
-            height: 300px;
+        }
+
+        .modal-media-main {
+            position: relative;
+            height: 400px;
             background: #F5F5F5;
             border-radius: 24px 24px 0 0;
             overflow: hidden;
         }
 
-        .modal-media img {
+        .modal-media-main img,
+        .modal-media-main video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        /* Boutons de navigation carrousel */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: #1A1A1A;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 5;
+        }
+
+        .carousel-nav:hover {
+            background: #FFFFFF;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 1rem;
+        }
+
+        .carousel-nav.next {
+            right: 1rem;
+        }
+
+        .carousel-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .carousel-nav:disabled:hover {
+            transform: translateY(-50%) scale(1);
+        }
+
+        /* Indicateurs de position */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 5;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: #FFFFFF;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Compteur média */
+        .media-counter {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 5;
+        }
+
+        /* Miniatures */
+        .media-thumbnails {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            background: #F8F7F4;
+        }
+
+        .media-thumbnails::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .media-thumbnails::-webkit-scrollbar-track {
+            background: #E5E5E5;
+            border-radius: 3px;
+        }
+
+        .media-thumbnails::-webkit-scrollbar-thumb {
+            background: #1A1A1A;
+            border-radius: 3px;
+        }
+
+        .media-thumbnail {
+            min-width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .media-thumbnail:hover {
+            border-color: #666666;
+        }
+
+        .media-thumbnail.active {
+            border-color: #1A1A1A;
+        }
+
+        .media-thumbnail img,
+        .media-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .media-thumbnail.video::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            padding-left: 3px;
+        }
+
         .modal-info {
-            padding: 2rem;
+            padding: 2.5rem;
         }
 
         .modal-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
             color: #1A1A1A;
             font-weight: 600;
+            line-height: 1.3;
         }
 
         .modal-price {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #1A1A1A;
             margin-bottom: 1.5rem;
             font-weight: 700;
@@ -405,8 +630,8 @@
 
         .modal-description {
             color: #666666;
-            margin-bottom: 2rem;
-            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
             font-size: 0.95rem;
         }
 
@@ -414,15 +639,16 @@
             display: block;
             font-weight: 600;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #1A1A1A;
+            letter-spacing: -0.2px;
         }
 
         .format-option {
             background: #F8F7F4;
-            padding: 1rem 1.25rem;
-            border-radius: 12px;
-            margin-bottom: 0.6rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 0.75rem;
             cursor: pointer;
             border: 2px solid transparent;
             display: flex;
@@ -450,7 +676,7 @@
         .format-price {
             color: #1A1A1A;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .order-btn {
@@ -458,15 +684,16 @@
             background: #1A1A1A;
             color: #FFFFFF;
             border: none;
-            padding: 1.2rem;
-            border-radius: 14px;
-            font-size: 0.95rem;
+            padding: 1.3rem;
+            border-radius: 16px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             transition: all 0.3s ease;
+            letter-spacing: 0.3px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
 
         .order-btn:hover {
@@ -475,25 +702,30 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
+        .order-btn:active {
+            transform: translateY(0);
+        }
+
         .rating-section {
             background: #F8F7F4;
-            padding: 1.5rem;
-            border-radius: 14px;
-            margin-bottom: 1.5rem;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
         }
 
         .rating-section h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             color: #1A1A1A;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .stars {
-            font-size: 1.8rem;
-            margin: 0.75rem 0;
+            font-size: 2rem;
+            margin: 1rem 0;
             display: flex;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
 
         .star {
@@ -505,26 +737,28 @@
         .star:hover,
         .star.active {
             color: #1A1A1A;
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         .rating-average {
             color: #666666;
-            font-size: 0.85rem;
-            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-weight: 400;
         }
 
         .comments-section {
             background: #F8F7F4;
-            padding: 1.5rem;
-            border-radius: 14px;
+            padding: 2rem;
+            border-radius: 16px;
         }
 
         .comments-section h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             color: #1A1A1A;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .comment-form textarea {
@@ -532,42 +766,48 @@
             background: #FFFFFF;
             border: 2px solid transparent;
             border-radius: 12px;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             color: #1A1A1A;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             resize: vertical;
             transition: all 0.3s ease;
+            line-height: 1.6;
         }
 
         .comment-form textarea:focus {
             outline: none;
             border-color: #1A1A1A;
+            background: #FFFFFF;
+        }
+
+        .comment-form textarea::placeholder {
+            color: #999999;
         }
 
         .submit-comment {
-            margin-top: 0.75rem;
+            margin-top: 1rem;
             background: #1A1A1A;
             color: #FFFFFF;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
+            padding: 0.85rem 1.75rem;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .submit-comment:hover {
             background: #000000;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         .comment {
             background: #FFFFFF;
-            padding: 1.25rem;
-            border-radius: 10px;
-            margin-top: 0.75rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
             border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
@@ -575,88 +815,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .comment-author {
             font-weight: 600;
             color: #1A1A1A;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .comment-rating {
             color: #1A1A1A;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .comment-text {
             color: #666666;
-            line-height: 1.6;
-            font-size: 0.85rem;
+            line-height: 1.7;
+            font-size: 0.9rem;
         }
 
         .comment-date {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #999999;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
+            font-weight: 400;
         }
 
         .no-comments {
             text-align: center;
             color: #999999;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             font-style: italic;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-
-        .sync-status {
-            text-align: center;
-            padding: 0.5rem;
-            font-size: 0.75rem;
-            color: #999;
-            margin-bottom: 0.5rem;
-        }
-
-        .sync-status.success {
-            color: #22c55e;
-        }
-
-        .sync-status.error {
-            color: #ef4444;
-        }
-
-        .sync-status.loading {
-            color: #3b82f6;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .brand-title {
-                font-size: 1.8rem;
-            }
-            
-            .modal-info {
-                padding: 1.5rem;
-            }
-            
-            .section {
-                padding: 1.5rem 1rem;
-            }
-        }
-
-        /* SCROLLBAR */
+        /* Scrollbar personnalisée */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -665,136 +861,123 @@
 
         ::-webkit-scrollbar-thumb {
             background: #D1D1D1;
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #1A1A1A;
         }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .brand-title {
+                font-size: 2rem;
+            }
+            
+            .modal-info {
+                padding: 2rem 1.5rem;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
+            }
+            
+            .products-section {
+                padding: 2rem 1rem;
+            }
+
+            .category-tabs {
+                gap: 0.5rem;
+            }
+
+            .category-tab {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.85rem;
+            }
+
+            .modal-media-main {
+                height: 300px;
+            }
+
+            .carousel-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .info-page {
+                padding: 2rem 1rem;
+            }
+
+            .info-page h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1 class="brand-title">😈 Le V Menu 😈</h1>
-        <p class="brand-subtitle">Qualité Premium • Bordeaux</p>
-        
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="switchTab('accueil')">🏠 Accueil</button>
-            <button class="nav-tab" onclick="switchTab('produits')">🛍️ Produits</button>
-            <button class="nav-tab" onclick="switchTab('infos')">ℹ️ Infos</button>
-        </nav>
+        <h1 class="brand-title">😈Le V Menu😈</h1>
+        <p class="brand-subtitle">Produits de qualité premium, choisis et cuisinés avec soin</p>
     </header>
 
-    <main>
-        <!-- ACCUEIL -->
-        <section id="accueil" class="section active">
-            <div class="info-section">
-                <h2>Bienvenue ! 👋</h2>
-                <p style="color: #666; line-height: 1.8; margin-bottom: 1.5rem;">
-                    Découvrez notre sélection de produits premium, soigneusement choisis et préparés. 
-                    Parcourez nos catégories et passez commande directement via Telegram.
-                </p>
-                <button class="contact-btn" onclick="contactTelegram()">
-                    📱 Nous contacter
-                </button>
-            </div>
+    <!-- NAVIGATION PAR CATÉGORIES -->
+    <nav class="category-nav">
+        <div class="category-tabs" id="categoryTabs"></div>
+    </nav>
 
-            <div class="info-section">
-                <h2>⭐ Nos Top Produits</h2>
-                <div id="topProductsGrid" class="products-grid"></div>
-            </div>
-        </section>
+    <main class="products-section" id="productsContainer"></main>
 
-        <!-- PRODUITS -->
-        <section id="produits" class="section">
-            <div class="category-filter">
-                <button class="category-btn active" onclick="filterCategory('all')">Tous</button>
-                <button class="category-btn" onclick="filterCategory('h')">🌿 H</button>
-                <button class="category-btn" onclick="filterCategory('fleurs')">🌸 Fleurs</button>
-                <button class="category-btn" onclick="filterCategory('labo')">🧪 Labo</button>
-            </div>
-            <div id="productsGrid" class="products-grid"></div>
-        </section>
-
-        <!-- INFOS -->
-        <section id="infos" class="section">
-            <div class="info-section">
-                <h2>📋 Informations pratiques</h2>
-                
-                <div class="info-item">
-                    <div class="info-icon">🕐</div>
-                    <div class="info-content">
-                        <h3>Horaires</h3>
-                        <p><strong>Prise de commande :</strong> 9h - 00h<br>
-                        <strong>Ouverture :</strong> 13h - 00h</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-icon">🚗</div>
-                    <div class="info-content">
-                        <h3>Livraison</h3>
-                        <p>Bordeaux et alentours<br>
-                        <strong>Supplément : +10€</strong></p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-icon">💶</div>
-                    <div class="info-content">
-                        <h3>Paiement</h3>
-                        <p>Cash uniquement</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-icon">📱</div>
-                    <div class="info-content">
-                        <h3>Contact</h3>
-                        <p>Commandez directement via Telegram<br>
-                        @Le_V667</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <h2>❓ Questions fréquentes</h2>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3>Comment commander ?</h3>
-                        <p>Cliquez sur un produit, choisissez votre format et envoyez votre commande via Telegram.</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3>Délai de livraison ?</h3>
-                        <p>Nous vous confirmons le délai lors de votre commande.</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3>Qualité garantie ?</h3>
-                        <p>Tous nos produits sont sélectionnés avec soin pour vous garantir la meilleure qualité.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="contact-btn" onclick="contactTelegram()">
-                📱 Commander maintenant
-            </button>
-        </section>
-    </main>
-
-    <!-- MODAL PRODUIT -->
+    <!-- Modal -->
     <div class="modal" id="productModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div class="modal-media">
-                <img id="modalImage" src="" alt="">
+            
+            <!-- GALERIE MÉDIA AVEC CARROUSEL -->
+            <div class="modal-media-gallery">
+                <div class="modal-media-main" id="modalMediaMain">
+                    <img id="modalImage" src="" alt="">
+                    
+                    <!-- Boutons de navigation -->
+                    <button class="carousel-nav prev" id="prevBtn" onclick="navigateCarousel(-1)">‹</button>
+                    <button class="carousel-nav next" id="nextBtn" onclick="navigateCarousel(1)">›</button>
+                    
+                    <!-- Compteur -->
+                    <div class="media-counter" id="mediaCounter">1 / 1</div>
+                    
+                    <!-- Indicateurs -->
+                    <div class="carousel-indicators" id="carouselIndicators"></div>
+                </div>
+                
+                <!-- Miniatures -->
+                <div class="media-thumbnails" id="mediaThumbnails"></div>
             </div>
+            
             <div class="modal-info">
                 <h2 class="modal-title" id="modalTitle"></h2>
                 <p class="modal-price" id="modalPrice"></p>
@@ -804,8 +987,6 @@
                 <div id="formatOptions"></div>
                 
                 <button class="order-btn" onclick="orderProduct()">Commander maintenant</button>
-                
-                <div id="syncStatus" class="sync-status"></div>
                 
                 <div class="rating-section">
                     <h3>Notez ce produit</h3>
@@ -833,57 +1014,41 @@
 
     <script>
         // ========================================
-        // ⚙️ CONFIGURATION FIREBASE
-        // ========================================
-        // ⚠️ REMPLACEZ CES VALEURS PAR VOS PROPRES IDENTIFIANTS FIREBASE
-        const firebaseConfig = {
-            apiKey: "AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            authDomain: "le-v-menu-xxxxx.firebaseapp.com",
-            databaseURL: "https://le-v-menu-xxxxx-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "le-v-menu-xxxxx",
-            storageBucket: "le-v-menu-xxxxx.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdefghijklmnop"
-        };
-
-        // ========================================
-        // 📦 CONFIGURATION PRODUITS
+        // ⚠️ CONFIGURATION - MODIFIEZ ICI
         // ========================================
         const CONFIG = {
             telegramUsername: 'Le_V667',
             
-            products: [
+            // CATÉGORIES DE PRODUITS
+            categories: [
                 {
-                    id: 'brownie-gg',
-                    name: 'Brownies Drysift 90u Gorilla Glue',
-                    description: 'The Gaz Selection / Sec et puissant en bouche 🍫😍',
-                    price: '8€',
-                    image: 'https://github.com/AppDropper/LeVapp/blob/main/gitkeep/h.jpeg?raw=true',
-                    badge: 'Top 1🥇',
-                    category: 'h',
-                    formats: [
-                        { name: 'Petite part (2.5g)', price: '20€' },
-                        { name: 'Moyenne part (5g)', price: '40€' },
-                        { name: 'Grande part (10g)', price: '80€' },
-                        { name: 'Livraison', price: '+10€' }
+                    id: 'H',
+                    name: '🍫 H',
+                    products: [
+                        {
+                            id: 1,
+                            name: 'Rechargement en cours🔄',
+                            description: 'H bientôt de retour !🍫🔄.',
+                            price: '8€',
+                            badge: '🔄🥇',
+                            media: [
+                                {
+                                    type: 'image',
+                                    url: 'https://github.com/AppDropper/github.io-LeV/blob/main/gitkeep/be%20back%20soon.jpg?raw=true'
+                                }
+                            ],
+                            formats: [
+                                { name: '2.5', price: '20€' },
+                                { name: '5', price: '40€' },
+                                { name: '10', price: '80€' },
+                                { name: 'Livraison', price: '+10€' }
+                            ],
+                            ratings: [],
+                            comments: []
+                        }
                     ]
                 },
                 {
-                    id: 'sucre-iso',
-                    name: 'Sucre Glass Isomère R/S',
-                    description: 'Sucre gourmand, Recette spéciale Hippodrome 🦄🌈',
-                    price: '20€',
-                    image: 'https://github.com/AppDropper/LeVapp/blob/main/gitkeep/Capture%20d%E2%80%99%C3%A9cran%202026-01-17%20153548.jpg?raw=true',
-                    badge: '🌈',
-                    category: 'labo',
-                    formats: [
-                        { name: '1 unité', price: '20€' },
-                        { name: '3 unités', price: '60€' },
-                        { name: '5 unités', price: '100€' },
-                        { name: 'Livraison', price: '+10€' }
-                    ]
-                }
-                    {
                     id: 'flowers',
                     name: '🌿 Fleurs',
                     products: [
@@ -916,41 +1081,52 @@
                         }
                     ]
                 },
+                {
+                    id: 'Labo',
+                    name: '💎 Labo',
+                    products: [
+                        {
+                            id: 3,
+                            name: 'Sucre Glass Isomere R/S',
+                            description: 'Sucre gourmand, Recette spéciale Hippodrome 🦄🌈',
+                            price: '20€',
+                            badge: '🌈',
+                            media: [
+                                {
+                                    type: 'image',
+                                    url: 'https://github.com/AppDropper/LeVapp/blob/main/gitkeep/Capture%20d%E2%80%99%C3%A9cran%202026-01-17%20153548.jpg?raw=true'
+                                },
+                            ],
+                            formats: [
+                                { name: '1', price: '20€' },
+                                { name: '3', price: '60€' },
+                                { name: '5', price: '100€' },
+                                { name: 'Livraison', price: '+10€' }
+                            ],
+                            ratings: [],
+                            comments: []
+                        }
+                    ]
+                },
+                {
+                    id: 'info',
+                    name: 'ℹ️ Infos',
+                    isInfoPage: true
+                }
             ]
         };
 
-        // ========================================
-        // 🔥 INITIALISATION FIREBASE
-        // ========================================
-        let database;
-        let firebaseInitialized = false;
-
-        try {
-            firebase.initializeApp(firebaseConfig);
-            database = firebase.database();
-            firebaseInitialized = true;
-            console.log('✅ Firebase initialisé avec succès');
-        } catch (error) {
-            console.error('❌ Erreur Firebase:', error);
-            alert('⚠️ Firebase non configuré. Veuillez suivre les instructions pour configurer votre base de données.');
-        }
-
-        // ========================================
-        // 🌐 VARIABLES GLOBALES
-        // ========================================
+        // Variables globales
         let currentProduct = null;
         let selectedFormat = null;
-        let currentCategory = 'all';
-        let productsData = {};
+        let currentCategory = null;
+        let currentMediaIndex = 0;
 
-        // ========================================
-        // 🚀 INITIALISATION
-        // ========================================
+        // Initialisation
         window.onload = function() {
             initTelegramWebApp();
-            initRealtimeListeners();
-            loadAllProducts();
-            loadTopProducts();
+            loadStoredData();
+            loadCategories();
         };
 
         function initTelegramWebApp() {
@@ -961,206 +1137,314 @@
             }
         }
 
-        // ========================================
-        // 🔄 FIREBASE REALTIME
-        // ========================================
-        function initRealtimeListeners() {
-            if (!firebaseInitialized) return;
-
-            CONFIG.products.forEach(product => {
-                const productRef = database.ref(`products/${product.id}`);
+        // CHARGEMENT DES CATÉGORIES
+        function loadCategories() {
+            const tabsContainer = document.getElementById('categoryTabs');
+            const productsContainer = document.getElementById('productsContainer');
+            
+            // Créer les onglets de navigation
+            CONFIG.categories.forEach((category, index) => {
+                const tab = document.createElement('div');
+                tab.className = 'category-tab' + (index === 0 ? ' active' : '');
+                tab.textContent = category.name;
+                tab.onclick = function() { switchCategory(category.id, this); };
+                tabsContainer.appendChild(tab);
                 
-                // Écouter les changements en temps réel
-                productRef.on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    productsData[product.id] = data || { ratings: [], comments: [] };
-                    
-                    // Rafraîchir l'affichage si c'est le produit ouvert
-                    if (currentProduct && currentProduct.id === product.id) {
-                        loadRatings(productsData[product.id].ratings || []);
-                        loadComments(productsData[product.id].comments || []);
-                    }
-                    
-                    // Rafraîchir les grilles de produits
-                    loadAllProducts();
-                    loadTopProducts();
-                });
-            });
-        }
-
-        async function saveRatingToFirebase(productId, rating) {
-            if (!firebaseInitialized) {
-                console.error('Firebase non initialisé');
-                return false;
-            }
-
-            try {
-                const productRef = database.ref(`products/${productId}/ratings`);
-                await productRef.push(rating);
-                return true;
-            } catch (error) {
-                console.error('Erreur sauvegarde note:', error);
-                showSyncStatus('Erreur lors de la sauvegarde', 'error');
-                return false;
-            }
-        }
-
-        async function saveCommentToFirebase(productId, comment) {
-            if (!firebaseInitialized) {
-                console.error('Firebase non initialisé');
-                return false;
-            }
-
-            try {
-                const productRef = database.ref(`products/${productId}/comments`);
-                await productRef.push(comment);
-                return true;
-            } catch (error) {
-                console.error('Erreur sauvegarde commentaire:', error);
-                showSyncStatus('Erreur lors de la sauvegarde', 'error');
-                return false;
-            }
-        }
-
-        // ========================================
-        // 📑 NAVIGATION
-        // ========================================
-        function switchTab(tabName) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        function filterCategory(category) {
-            currentCategory = category;
-            
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            loadAllProducts();
-        }
-
-        // ========================================
-        // 🛍️ AFFICHAGE DES PRODUITS
-        // ========================================
-        function loadAllProducts() {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = '';
-            
-            const filteredProducts = currentCategory === 'all' 
-                ? CONFIG.products 
-                : CONFIG.products.filter(p => p.category === currentCategory);
-            
-            if (filteredProducts.length === 0) {
-                grid.innerHTML = '<p class="no-comments">Aucun produit dans cette catégorie</p>';
-                return;
-            }
-            
-            filteredProducts.forEach(product => {
-                const data = productsData[product.id] || { ratings: [], comments: [] };
-                const ratings = Object.values(data.ratings || {});
-                const avgRating = calculateAverageRating(ratings);
+                // Créer la section pour chaque catégorie
+                const section = document.createElement('div');
+                section.className = 'category-section' + (index === 0 ? ' active' : '');
+                section.id = `category-${category.id}`;
                 
-                const card = createProductCard(product, avgRating, ratings.length);
-                grid.appendChild(card);
-            });
-        }
+                if (category.isInfoPage) {
+                    // PAGE INFOS
+                    section.innerHTML = `
+                        <div class="info-page">
+                            <h2>📋 Informations & Contact</h2>
+                            <p>Bienvenue chez L'Hippodrome33. N'hesitez pas à nous contacter pour toute question.</p>
+                            
+                            <div class="info-section">
+                                <h3>🕒 Horaires d'ouverture</h3>
+                                <div class="info-card">
+                                    <p><strong>Prise de commande :</strong> 10h - 00h</p>
+                                    <p><strong>Ouverture :</strong> 13h00 - 00h00</p>
+                                </div>
+                            </div>
 
-        function loadTopProducts() {
-            const grid = document.getElementById('topProductsGrid');
-            grid.innerHTML = '';
-            
-            const topProducts = CONFIG.products
-                .filter(p => p.badge && p.badge.includes('Top'))
-                .slice(0, 3);
-            
-            topProducts.forEach(product => {
-                const data = productsData[product.id] || { ratings: [], comments: [] };
-                const ratings = Object.values(data.ratings || {});
-                const avgRating = calculateAverageRating(ratings);
+                            <div class="info-section">
+                                <h3>📍Meet up et livraison</h3>
+                                <div class="info-card">
+                                    <ul>
+                                        <li>Meet up en MP</li>
+                                        <li>Livraison : +10€</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                    `;
+                } else {
+                    // SECTION PRODUITS
+                    section.innerHTML = `
+                        <h2 class="category-title">${category.name}</h2>
+                        <div class="products-grid" id="grid-${category.id}"></div>
+                    `;
+                }
                 
-                const card = createProductCard(product, avgRating, ratings.length);
-                grid.appendChild(card);
+                productsContainer.appendChild(section);
+                
+                // Charger les produits si ce n'est pas la page info
+                if (!category.isInfoPage) {
+                    loadProductsForCategory(category);
+                }
             });
         }
 
-        function createProductCard(product, avgRating, ratingsCount) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.onclick = () => openProductModal(product);
+        function switchCategory(categoryId, tabElement) {
+            currentCategory = categoryId;
             
-            card.innerHTML = `
-                <div class="product-image-container">
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
-                    ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">${product.name}</h3>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-footer">
-                        <span class="product-price">${product.price}</span>
-                        <div class="product-rating">
-                            <span>★</span>
-                            <span>${avgRating.toFixed(1)}</span>
-                            <span>(${ratingsCount})</span>
+            // Mettre à jour les onglets actifs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+            
+            // Afficher la bonne section
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`category-${categoryId}`).classList.add('active');
+        }
+
+        function loadProductsForCategory(category) {
+            const grid = document.getElementById(`grid-${category.id}`);
+            
+            category.products.forEach(product => {
+                const avgRating = calculateAverageRating(product.ratings);
+                const mainImage = product.media && product.media[0] ? product.media[0].url : '';
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openProductModal(product);
+                
+                card.innerHTML = `
+                    <div class="product-image-container">
+                        <img src="${mainImage}" alt="${product.name}" class="product-image">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-footer">
+                            <span class="product-price">${product.price}</span>
+                            <div class="product-rating">
+                                <span>★</span>
+                                <span>${avgRating.toFixed(1)}</span>
+                                <span>(${product.ratings.length})</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            
-            return card;
+                `;
+                
+                grid.appendChild(card);
+            });
         }
 
-        // ========================================
-        // 🔍 MODAL PRODUIT
-        // ========================================
+        // FORMULAIRE DE CONTACT
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const telegramHandle = document.getElementById('telegramHandle').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const requestType = document.getElementById('requestType').value;
+            const message = document.getElementById('message').value;
+            
+            const formattedMessage = `📋 NOUVEAU MESSAGE\n\n` +
+                `👤 Nom: ${fullName}\n` +
+                `💬 Telegram: ${telegramHandle}\n` +
+                `${email ? `📧 Email: ${email}\n` : ''}` +
+                `${phone ? `📱 Téléphone: ${phone}\n` : ''}` +
+                `🏷️ Type: ${requestType}\n\n` +
+                `💭 Message:\n${message}`;
+            
+            const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(formattedMessage)}`;
+            
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.openTelegramLink(url);
+            } else {
+                window.open(url, '_blank');
+            }
+            
+            // Réinitialiser le formulaire
+            document.getElementById('contactForm').reset();
+            showFeedback('Message envoyé ! Nous vous répondrons rapidement.');
+        }
+
+        // OUVERTURE DU MODAL AVEC CARROUSEL
         function openProductModal(product) {
             currentProduct = product;
             selectedFormat = product.formats[0];
+            currentMediaIndex = 0;
             
-            document.getElementById('modalImage').src = product.image;
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalPrice').textContent = product.price;
             document.getElementById('modalDescription').textContent = product.description;
             
+            loadMediaGallery(product);
             loadFormats(product.formats);
-            
-            const data = productsData[product.id] || { ratings: [], comments: [] };
-            const ratings = Object.values(data.ratings || {});
-            const comments = Object.values(data.comments || {});
-            
-            loadRatings(ratings);
-            loadComments(comments);
+            loadRatings(product);
+            loadComments(product);
             
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            document.getElementById('productModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        // CHARGEMENT DE LA GALERIE MÉDIA AVEC CARROUSEL
+        function loadMediaGallery(product) {
+            const mainContainer = document.getElementById('modalMediaMain');
+            const thumbnailsContainer = document.getElementById('mediaThumbnails');
+            const indicatorsContainer = document.getElementById('carouselIndicators');
+            
+            if (!product.media || product.media.length === 0) {
+                mainContainer.innerHTML = '<img src="" alt="Pas d\'image">';
+                thumbnailsContainer.style.display = 'none';
+                indicatorsContainer.innerHTML = '';
+                document.getElementById('mediaCounter').textContent = '0 / 0';
+                return;
+            }
+            
+            // Afficher ou masquer les miniatures selon le nombre de médias
+            if (product.media.length > 1) {
+                thumbnailsContainer.style.display = 'flex';
+            } else {
+                thumbnailsContainer.style.display = 'none';
+            }
+            
+            // Afficher le premier média
+            displayMedia(product.media[0], mainContainer);
+            updateMediaCounter();
+            
+            // Créer les miniatures
+            thumbnailsContainer.innerHTML = '';
+            product.media.forEach((media, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'media-thumbnail' + (index === 0 ? ' active' : '') + (media.type === 'video' ? ' video' : '');
+                thumb.onclick = () => switchMedia(index);
+                
+                if (media.type === 'image') {
+                    thumb.innerHTML = `<img src="${media.url}" alt="Image ${index + 1}">`;
+                } else if (media.type === 'video') {
+                    thumb.innerHTML = `<video src="${media.url}" muted></video>`;
+                }
+                
+                thumbnailsContainer.appendChild(thumb);
+            });
+            
+            // Créer les indicateurs
+            indicatorsContainer.innerHTML = '';
+            product.media.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator' + (index === 0 ? ' active' : '');
+                indicator.onclick = () => switchMedia(index);
+                indicatorsContainer.appendChild(indicator);
+            });
+            
+            // Mettre à jour l'état des boutons
+            updateCarouselButtons();
         }
 
-        function showSyncStatus(message, type) {
-            const status = document.getElementById('syncStatus');
-            status.textContent = message;
-            status.className = `sync-status ${type}`;
+        function navigateCarousel(direction) {
+            if (!currentProduct || !currentProduct.media) return;
             
-            if (type === 'success') {
-                setTimeout(() => {
-                    status.textContent = '';
-                    status.className = 'sync-status';
-                }, 2000);
+            const newIndex = currentMediaIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < currentProduct.media.length) {
+                switchMedia(newIndex);
             }
         }
 
-        // ========================================
-        // 📦 FORMATS
-        // ========================================
+        function switchMedia(index) {
+            if (!currentProduct || !currentProduct.media) return;
+            
+            currentMediaIndex = index;
+            const media = currentProduct.media[index];
+            const mainContainer = document.getElementById('modalMediaMain');
+            
+            // Arrêter toutes les vidéos
+            const videos = mainContainer.querySelectorAll('video');
+            videos.forEach(v => v.pause());
+            
+            displayMedia(media, mainContainer);
+            updateMediaCounter();
+            
+            // Mettre à jour les miniatures actives
+            document.querySelectorAll('.media-thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+            
+            // Mettre à jour les indicateurs
+            document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+            
+            // Mettre à jour les boutons
+            updateCarouselButtons();
+        }
+
+        function displayMedia(media, container) {
+            const existingContent = container.querySelector('img, video');
+            const navButtons = container.querySelectorAll('.carousel-nav');
+            const counter = container.querySelector('.media-counter');
+            const indicators = container.querySelector('.carousel-indicators');
+            
+            // Supprimer uniquement le média, pas les contrôles
+            if (existingContent) {
+                existingContent.remove();
+            }
+            
+            let mediaElement;
+            if (media.type === 'image') {
+                mediaElement = document.createElement('img');
+                mediaElement.src = media.url;
+                mediaElement.alt = 'Produit';
+            } else if (media.type === 'video') {
+                mediaElement = document.createElement('video');
+                mediaElement.src = media.url;
+                mediaElement.controls = true;
+                mediaElement.autoplay = true;
+                mediaElement.loop = true;
+            }
+            
+            // Insérer le média avant les boutons
+            container.insertBefore(mediaElement, container.firstChild);
+        }
+
+        function updateMediaCounter() {
+            if (!currentProduct || !currentProduct.media) return;
+            
+            const counter = document.getElementById('mediaCounter');
+            counter.textContent = `${currentMediaIndex + 1} / ${currentProduct.media.length}`;
+        }
+
+        function updateCarouselButtons() {
+            if (!currentProduct || !currentProduct.media) return;
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentMediaIndex === 0;
+            nextBtn.disabled = currentMediaIndex === currentProduct.media.length - 1;
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Arrêter les vidéos
+            const videos = document.querySelectorAll('#modalMediaMain video');
+            videos.forEach(video => video.pause());
+        }
+
         function loadFormats(formats) {
             const container = document.getElementById('formatOptions');
             container.innerHTML = '';
@@ -1187,16 +1471,13 @@
             element.classList.add('selected');
         }
 
-        // ========================================
-        // 🛒 COMMANDE
-        // ========================================
         function orderProduct() {
             if (!selectedFormat) {
                 alert('Veuillez sélectionner un format');
                 return;
             }
             
-            const message = `Bonjour ! 👋\n\nJe souhaite commander :\n\n📦 ${currentProduct.name}\n📏 Format : ${selectedFormat.name}\n💰 Prix : ${selectedFormat.price}`;
+            const message = `Bonjour ! Je souhaite commander :\n\n📦 ${currentProduct.name}\n📏 Format : ${selectedFormat.name}\n💰 Prix : ${selectedFormat.price}`;
             const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(message)}`;
             
             if (window.Telegram && window.Telegram.WebApp) {
@@ -1206,41 +1487,19 @@
             }
         }
 
-        function contactTelegram() {
-            const message = `Bonjour ! 👋\n\nJe souhaite obtenir plus d'informations.`;
-            const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(message)}`;
-            
-            if (window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.openTelegramLink(url);
-            } else {
-                window.open(url, '_blank');
-            }
-        }
-
-        // ========================================
-        // ⭐ NOTES
-        // ========================================
-        async function addRating(rating) {
+        function addRating(rating) {
             if (!currentProduct) return;
-            if (!firebaseInitialized) {
-                alert('Firebase non configuré. Impossible de sauvegarder.');
-                return;
-            }
             
-            showSyncStatus('Sauvegarde...', 'loading');
-            
-            const success = await saveRatingToFirebase(currentProduct.id, rating);
-            
-            if (success) {
-                showSyncStatus('Note enregistrée ! ⭐', 'success');
-                showFeedback('Merci pour votre note !');
-            }
+            currentProduct.ratings.push(rating);
+            saveToStorage();
+            loadRatings(currentProduct);
+            showFeedback('Merci pour votre note !');
         }
 
-        function loadRatings(ratings) {
-            const avgRating = calculateAverageRating(ratings);
-            const text = ratings.length > 0 
-                ? `Note moyenne : ${avgRating.toFixed(1)}/5 (${ratings.length} avis)`
+        function loadRatings(product) {
+            const avgRating = calculateAverageRating(product.ratings);
+            const text = product.ratings.length > 0 
+                ? `Note moyenne : ${avgRating.toFixed(1)}/5 (${product.ratings.length} avis)`
                 : 'Soyez le premier à noter ce produit';
             
             document.getElementById('ratingAverage').textContent = text;
@@ -1261,14 +1520,11 @@
         }
 
         function calculateAverageRating(ratings) {
-            if (!ratings || ratings.length === 0) return 0;
+            if (ratings.length === 0) return 0;
             return ratings.reduce((a, b) => a + b, 0) / ratings.length;
         }
 
-        // ========================================
-        // 💬 COMMENTAIRES
-        // ========================================
-        async function addComment() {
+        function addComment() {
             const input = document.getElementById('commentInput');
             const text = input.value.trim();
             
@@ -1277,47 +1533,30 @@
                 return;
             }
             
-            if (!firebaseInitialized) {
-                alert('Firebase non configuré. Impossible de sauvegarder.');
-                return;
-            }
-            
-            showSyncStatus('Sauvegarde...', 'loading');
-            
-            const data = productsData[currentProduct.id] || { ratings: [], comments: [] };
-            const ratings = Object.values(data.ratings || {});
-            
             const comment = {
                 author: getUserName(),
                 text: text,
                 date: new Date().toISOString(),
-                rating: calculateAverageRating(ratings)
+                rating: calculateAverageRating(currentProduct.ratings)
             };
             
-            const success = await saveCommentToFirebase(currentProduct.id, comment);
-            
-            if (success) {
-                input.value = '';
-                showSyncStatus('Commentaire publié ! 💬', 'success');
-                showFeedback('Commentaire publié !');
-            }
+            currentProduct.comments.unshift(comment);
+            saveToStorage();
+            loadComments(currentProduct);
+            input.value = '';
+            showFeedback('Commentaire publié !');
         }
 
-        function loadComments(comments) {
+        function loadComments(product) {
             const container = document.getElementById('commentsList');
             container.innerHTML = '';
             
-            if (!comments || comments.length === 0) {
+            if (product.comments.length === 0) {
                 container.innerHTML = '<p class="no-comments">Aucun commentaire. Soyez le premier !</p>';
                 return;
             }
             
-            // Trier par date décroissante
-            const sortedComments = comments.sort((a, b) => 
-                new Date(b.date) - new Date(a.date)
-            );
-            
-            sortedComments.forEach(comment => {
+            product.comments.forEach(comment => {
                 const div = document.createElement('div');
                 div.className = 'comment';
                 
@@ -1332,7 +1571,7 @@
                 div.innerHTML = `
                     <div class="comment-header">
                         <span class="comment-author">${escapeHtml(comment.author)}</span>
-                        <span class="comment-rating">${'★'.repeat(Math.round(comment.rating || 0))}</span>
+                        <span class="comment-rating">${'★'.repeat(Math.round(comment.rating))}</span>
                     </div>
                     <p class="comment-text">${escapeHtml(comment.text)}</p>
                     <p class="comment-date">${formatted}</p>
@@ -1342,9 +1581,6 @@
             });
         }
 
-        // ========================================
-        // 🛠️ UTILITAIRES
-        // ========================================
         function getUserName() {
             try {
                 if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
@@ -1352,7 +1588,7 @@
                     if (user && user.first_name) return user.first_name;
                 }
             } catch (e) {}
-            return 'Client';
+            return 'Utilisateur';
         }
 
         function escapeHtml(text) {
@@ -1366,12 +1602,49 @@
             feedback.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1A1A1A;color:white;padding:1rem 2rem;border-radius:12px;font-weight:500;z-index:10000;box-shadow:0 8px 32px rgba(0,0,0,0.2);font-size:0.9rem;';
             feedback.textContent = message;
             document.body.appendChild(feedback);
-            setTimeout(() => feedback.remove(), 2500);
+            setTimeout(() => feedback.remove(), 2000);
         }
 
-        // Fermer modal avec Echap
+        function saveToStorage() {
+            try {
+                localStorage.setItem('vmenu_data', JSON.stringify(CONFIG.categories));
+            } catch (e) {
+                console.log('Erreur de sauvegarde');
+            }
+        }
+
+        function loadStoredData() {
+            try {
+                const stored = localStorage.getItem('vmenu_data');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    data.forEach((storedCategory, catIndex) => {
+                        if (CONFIG.categories[catIndex] && !CONFIG.categories[catIndex].isInfoPage) {
+                            storedCategory.products.forEach((storedProduct, prodIndex) => {
+                                if (CONFIG.categories[catIndex].products[prodIndex]) {
+                                    CONFIG.categories[catIndex].products[prodIndex].ratings = storedProduct.ratings || [];
+                                    CONFIG.categories[catIndex].products[prodIndex].comments = storedProduct.comments || [];
+                                }
+                            });
+                        }
+                    });
+                }
+            } catch (e) {
+                console.log('Erreur de chargement');
+            }
+        }
+
+        // Navigation au clavier
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (document.getElementById('productModal').classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateCarousel(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateCarousel(1);
+                }
+            }
         });
 
         // Fermer modal en cliquant à l'extérieur
