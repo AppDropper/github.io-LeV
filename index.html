@@ -97,7 +97,40 @@
             max-width: 1200px;
             margin: 0 auto;
             background: #1A1A1A;
+            
+            /* 🎨 CONFIGURATION IMAGE DE FOND */
+            /* Pour utiliser une image de fond, décommentez les lignes ci-dessous */
+            /* et commentez la ligne background: #1A1A1A; */
+            
+            /* background-image: url('VOTRE_URL_IMAGE_ICI'); */
+            /* background-size: cover; */
+            /* background-position: center; */
+            /* background-attachment: fixed; */
+            /* background-repeat: no-repeat; */
+            
+            position: relative;
         }
+        
+        /* Overlay pour rendre le texte lisible sur l'image de fond */
+        /* Décommentez si vous utilisez une image de fond */
+        /*
+        .products-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 26, 0.7);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .category-section {
+            position: relative;
+            z-index: 1;
+        }
+        */
 
         .category-section {
             display: none;
@@ -251,46 +284,6 @@
             padding-left: 1rem;
         }
 
-        .form-group {
-            margin-bottom: 1.75rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.75rem;
-            color: #1A1A1A;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            border: 2px solid #E5E5E5;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: #F8F7F4;
-            color: #1A1A1A;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: #1A1A1A;
-            background: #FFFFFF;
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-            line-height: 1.6;
-        }
-
         .info-card {
             background: #F8F7F4;
             padding: 1.75rem;
@@ -351,26 +344,6 @@
         }
 
         .contact-button:hover {
-            background: #000000;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .submit-info-btn {
-            width: 100%;
-            background: #1A1A1A;
-            color: #FFFFFF;
-            border: none;
-            padding: 1.3rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .submit-info-btn:hover {
             background: #000000;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -1033,13 +1006,26 @@
                             badge: '🇨🇦',
                             media: [
                                 {
-                                     type: 'image',
-                                     url: 'https://github.com/AppDropper/github.io-LeV/blob/main/gitkeep/IMG_5963.jpeg?raw=true'
-                                 },
+                                    type: 'image',
+                                    url: 'https://github.com/AppDropper/github.io-LeV/blob/main/gitkeep/IMG_5963.jpeg?raw=true'
+                                },
                                 {
                                     type: 'video',
                                     url: 'https://github.com/AppDropper/github.io-LeV/blob/main/gitkeep/-636874642319909691%20(2).mp4?raw=true'
-                                },
+                                }
+                            ],
+                            formats: [
+                                { name: '2', price: '20€' },
+                                { name: '3', price: '30€' },
+                                { name: '5', price: '50€' },
+                                { name: '8', price: '80€' },
+                                { name: '10', price: '100€' },
+                                { name: 'Livraison', price: '🎁' }
+                            ],
+                            ratings: [],
+                            comments: []
+                        }
+                    ]
                 },
                 {
                     id: 'H',
@@ -1068,20 +1054,6 @@
                         }
                     ]
                 },
-                            ],
-                            formats: [
-                                { name: '2', price: '20€' },
-                                { name: '3', price: '30€' },
-                                { name: '5', price: '50€' },
-                                { name: '8', price: '80€' },
-                                { name: '10', price: '100€' },
-                                { name: 'Livraison', price: '🎁' }
-                            ],
-                            ratings: [],
-                            comments: []
-                        }
-                    ]
-                },
                 {
                     id: 'Labo',
                     name: '💎 Labo',
@@ -1096,7 +1068,7 @@
                                 {
                                     type: 'image',
                                     url: 'https://github.com/AppDropper/LeVapp/blob/main/gitkeep/Capture%20d%E2%80%99%C3%A9cran%202026-01-17%20153548.jpg?raw=true'
-                                },
+                                }
                             ],
                             formats: [
                                 { name: '1', price: '20€' },
@@ -1161,26 +1133,29 @@
                     section.innerHTML = `
                         <div class="info-page">
                             <h2>📋 Informations & Contact</h2>
-                            <p>Bienvenue chez L'Hippodrome33. N'hesitez pas à nous contacter pour toute question.</p>
+                            <p>Bienvenue chez L'Hippodrome33. N'hésitez pas à nous contacter pour toute question.</p>
                             
                             <div class="info-section">
                                 <h3>🕒 Horaires d'ouverture</h3>
                                 <div class="info-card">
-                                    <p><strong>Prise de commande :</strong> 10h - 00h</p>
-                                    <p><strong>Ouverture :</strong> 13h00 - 00h00</p>
+                                    <p><strong>Prise de commande :</strong> 9h - 00h</p>
+                                    <p><strong>Ouverture :</strong> 13h - 00h</p>
                                 </div>
                             </div>
 
                             <div class="info-section">
-                                <h3>📍Meet up et livraison</h3>
+                                <h3>📍 Meet up et livraison</h3>
                                 <div class="info-card">
                                     <ul>
                                         <li>Meet up en MP</li>
-                                        <li>Livraison : +10€</li>
+                                        <li>Livraison Bordeaux et alentours : +10€</li>
+                                        <li>Paiement : Cash uniquement</li>
                                     </ul>
                                 </div>
                             </div>
                             
+                            <button class="contact-button" onclick="contactTelegram()">📱 Nous contacter sur Telegram</button>
+                        </div>
                     `;
                 } else {
                     // SECTION PRODUITS
@@ -1249,36 +1224,15 @@
             });
         }
 
-        // FORMULAIRE DE CONTACT
-        function submitContactForm(event) {
-            event.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const telegramHandle = document.getElementById('telegramHandle').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const requestType = document.getElementById('requestType').value;
-            const message = document.getElementById('message').value;
-            
-            const formattedMessage = `📋 NOUVEAU MESSAGE\n\n` +
-                `👤 Nom: ${fullName}\n` +
-                `💬 Telegram: ${telegramHandle}\n` +
-                `${email ? `📧 Email: ${email}\n` : ''}` +
-                `${phone ? `📱 Téléphone: ${phone}\n` : ''}` +
-                `🏷️ Type: ${requestType}\n\n` +
-                `💭 Message:\n${message}`;
-            
-            const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(formattedMessage)}`;
+        function contactTelegram() {
+            const message = `Bonjour ! 👋\n\nJe souhaite obtenir plus d'informations.`;
+            const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(message)}`;
             
             if (window.Telegram && window.Telegram.WebApp) {
                 window.Telegram.WebApp.openTelegramLink(url);
             } else {
                 window.open(url, '_blank');
             }
-            
-            // Réinitialiser le formulaire
-            document.getElementById('contactForm').reset();
-            showFeedback('Message envoyé ! Nous vous répondrons rapidement.');
         }
 
         // OUVERTURE DU MODAL AVEC CARROUSEL
@@ -1394,9 +1348,6 @@
 
         function displayMedia(media, container) {
             const existingContent = container.querySelector('img, video');
-            const navButtons = container.querySelectorAll('.carousel-nav');
-            const counter = container.querySelector('.media-counter');
-            const indicators = container.querySelector('.carousel-indicators');
             
             // Supprimer uniquement le média, pas les contrôles
             if (existingContent) {
@@ -1478,7 +1429,7 @@
                 return;
             }
             
-            const message = `Bonjour ! Je souhaite commander :\n\n📦 ${currentProduct.name}\n📏 Format : ${selectedFormat.name}\n💰 Prix : ${selectedFormat.price}`;
+            const message = `Bonjour ! 👋\n\nJe souhaite commander :\n\n📦 ${currentProduct.name}\n📏 Format : ${selectedFormat.name}\n💰 Prix : ${selectedFormat.price}`;
             const url = `https://t.me/${CONFIG.telegramUsername}?text=${encodeURIComponent(message)}`;
             
             if (window.Telegram && window.Telegram.WebApp) {
